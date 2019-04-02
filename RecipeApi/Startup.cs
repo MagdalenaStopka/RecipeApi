@@ -25,6 +25,7 @@ namespace RecipeApi
             services.AddDbContext<RecipeContext>(o => o.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
             
             services.AddMvcCore()
+                .AddDataAnnotations()
                 .AddJsonFormatters()
                 .AddJsonOptions(o => o.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented);
         }

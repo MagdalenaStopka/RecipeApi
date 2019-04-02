@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RecipeApi.Models;
 
 namespace RecipeApi.Migrations
 {
     [DbContext(typeof(RecipeContext))]
-    partial class RecipeContextModelSnapshot : ModelSnapshot
+    [Migration("20190402174915_FK")]
+    partial class FK
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,7 +31,11 @@ namespace RecipeApi.Migrations
                         .IsRequired()
                         .HasMaxLength(100);
 
+                    b.Property<int?>("RecipeID");
+
                     b.HasKey("ID");
+
+                    b.HasIndex("RecipeID");
 
                     b.ToTable("Categories");
                 });
@@ -43,7 +49,8 @@ namespace RecipeApi.Migrations
                     b.Property<string>("Body")
                         .IsRequired();
 
-                    b.Property<int?>("CategoryID");
+                    b.Property<string>("Category")
+                        .HasMaxLength(100);
 
                     b.Property<string>("Image");
 
@@ -53,16 +60,14 @@ namespace RecipeApi.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("CategoryID");
-
                     b.ToTable("Recipes");
                 });
 
-            modelBuilder.Entity("RecipeApi.Models.Recipe", b =>
+            modelBuilder.Entity("RecipeApi.Models.Category", b =>
                 {
-                    b.HasOne("RecipeApi.Models.Category", "Category")
-                        .WithMany("Recipes")
-                        .HasForeignKey("CategoryID");
+                    b.HasOne("RecipeApi.Models.Recipe")
+                        .WithMany("Categories")
+                        .HasForeignKey("RecipeID");
                 });
 #pragma warning restore 612, 618
         }

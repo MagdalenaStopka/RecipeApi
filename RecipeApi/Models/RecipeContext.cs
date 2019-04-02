@@ -14,9 +14,11 @@ namespace RecipeApi.Models
 
         }
        public DbSet<Recipe> Recipes { get; set; }
+       public DbSet<Category> Categories { get; set; }
     }
 }
 
 // update-database
 // add-migration init
 //add-migration DataAnnotations
+//add-migration Category
