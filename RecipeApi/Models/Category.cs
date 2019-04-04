@@ -8,16 +8,16 @@ namespace RecipeApi.Models
 {
     public class Category
     {
-        public Category()
-        {
-            Recipes = new HashSet<Recipe>(); // hashset nie pozwala na duplikaty
-        }
+        //public Category()
+        //{
+        //    Recipes = new HashSet<Recipe>(); // hashset nie pozwala na duplikaty
+        //}
         public int ID { get; set; }
         [MaxLength(100)]
         [Required]
         public string Name { get; set; }
 
-        public virtual ICollection<Recipe> Recipes { get; set; }
+        //public virtual ICollection<Recipe> Recipes { get; set; }
 
         
     }
