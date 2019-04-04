@@ -65,7 +65,7 @@ namespace RecipeApi.Controllers
         {
             try
             {
-                if(ModelState.IsValid)
+                if(ModelState.IsValid && CategoryExists(recipe.CategoryId))
                 {
                     db.Recipes.Add(recipe);
                     db.SaveChanges();
@@ -91,7 +91,7 @@ namespace RecipeApi.Controllers
 
             try
             {
-                if (ModelState.IsValid)
+                if (ModelState.IsValid && CategoryExists(recipe.CategoryId))
                 {
                     if (id < 0)
                     {
@@ -149,5 +149,13 @@ namespace RecipeApi.Controllers
             //};
 
         }
+        private bool CategoryExists(int? id)
+        {
+            if (id == null)
+                return true;
+            return db.Categories.Any( a => a.ID == id);
+        }
     }
+
+    
 }
