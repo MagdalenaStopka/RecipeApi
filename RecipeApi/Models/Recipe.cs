@@ -26,6 +26,6 @@ namespace RecipeApi.Models
 
         //public virtual ICollection<Category> Categories { get; set; }  // dokladanie kategorii jako relacja 1 do wielu, dodanie kategorii, jako klucz opcy
         public Category Category { get; set; }
-        //public int? CategoryId { get; set; }
+        public int? CategoryId { get; set; }
     }
 }

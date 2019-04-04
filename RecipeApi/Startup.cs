@@ -22,8 +22,9 @@ namespace RecipeApi
         } 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<RecipeContext>(o => o.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-            
+            //services.AddDbContext<RecipeContext>(o => o.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<RecipeContext>(o => o.UseSqlite(configuration.GetConnectionString("SQLiteConnection")));
+
             services.AddMvcCore()
                 .AddDataAnnotations()
                 .AddJsonFormatters()
