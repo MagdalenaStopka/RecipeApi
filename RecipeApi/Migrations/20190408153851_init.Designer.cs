@@ -9,8 +9,8 @@ using RecipeApi.Models;
 namespace RecipeApi.Migrations
 {
     [DbContext(typeof(RecipeContext))]
-    [Migration("20190404174234_SQLinit")]
-    partial class SQLinit
+    [Migration("20190408153851_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,6 +30,20 @@ namespace RecipeApi.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("RecipeApi.Models.Key", b =>
+                {
+                    b.Property<string>("Name")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ExpirationDate");
+
+                    b.Property<string>("Role");
+
+                    b.HasKey("Name");
+
+                    b.ToTable("Keys");
                 });
 
             modelBuilder.Entity("RecipeApi.Models.Recipe", b =>

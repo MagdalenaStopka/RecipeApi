@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using RecipeApi.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +10,29 @@ namespace RecipeApi.Models
 {
     public class RecipeContext : DbContext
     {
+        public RecipeContext()
+        {
+
+        }
+       
         // tworzenie kontekstu z bazy
         public RecipeContext(DbContextOptions<RecipeContext> options) :base(options)
         {
 
         }
-       public DbSet<Recipe> Recipes { get; set; }
+
+        
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+
+        {
+            optionsBuilder.UseSqlite(StaticValues.ConnectionHelper);
+            //optionsBuilder.UseSqlite("FileName=./Data/Recipes.db"); //Przekazać w inny sposób.
+
+        }
+        public DbSet<Recipe> Recipes { get; set; }
        public DbSet<Category> Categories { get; set; }
+       public DbSet<Key> Keys { get; set; }
+        public string ConnectionName { get; }
     }
 }
 

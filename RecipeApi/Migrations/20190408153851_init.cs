@@ -2,7 +2,7 @@
 
 namespace RecipeApi.Migrations
 {
-    public partial class SQLinit : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,6 +20,19 @@ namespace RecipeApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Keys",
+                columns: table => new
+                {
+                    Name = table.Column<string>(nullable: false),
+                    Role = table.Column<string>(nullable: true),
+                    ExpirationDate = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Keys", x => x.Name);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Recipes",
                 columns: table => new
                 {
@@ -33,12 +46,12 @@ namespace RecipeApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Recipes", x => x.ID);
-                    //table.ForeignKey(
-                    //    name: "FK_Recipes_Categories_CategoryId",
-                    //    column: x => x.CategoryId,
-                    //    principalTable: "Categories",
-                    //    principalColumn: "ID",
-                    //    onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Recipes_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -49,6 +62,9 @@ namespace RecipeApi.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Keys");
+
             migrationBuilder.DropTable(
                 name: "Recipes");
 

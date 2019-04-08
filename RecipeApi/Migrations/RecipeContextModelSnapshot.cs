@@ -30,6 +30,20 @@ namespace RecipeApi.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("RecipeApi.Models.Key", b =>
+                {
+                    b.Property<string>("Name")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ExpirationDate");
+
+                    b.Property<string>("Role");
+
+                    b.HasKey("Name");
+
+                    b.ToTable("Keys");
+                });
+
             modelBuilder.Entity("RecipeApi.Models.Recipe", b =>
                 {
                     b.Property<int>("ID")
