@@ -20,7 +20,7 @@ namespace RecipeApi.Controllers
             this.db = db;
         }
         [HttpGet]
-        [KeyAuthorize(PolicyEnum.Reader)]
+       // [KeyAuthorize(PolicyEnum.Reader)]
         public IActionResult GetRecipes()
         {
             try
@@ -37,7 +37,7 @@ namespace RecipeApi.Controllers
         }
 
         [HttpGet("{id}")]
-        [KeyAuthorize(PolicyEnum.Reader)]
+       // [KeyAuthorize(PolicyEnum.Reader)]
         public IActionResult GetRecipes(int id)
         {
             //var item = new Recipe
@@ -65,7 +65,7 @@ namespace RecipeApi.Controllers
 
         }
         [HttpPost ]
-        [KeyAuthorize(PolicyEnum.User)]
+       // [KeyAuthorize(PolicyEnum.User)]
         public IActionResult AddRecipes( Recipe recipe) // musi wiedziec jaki obiekt ma utorzyć/zwrocic [FromBody] piszemy, jak nie ma na gorze [ApiController]
         {
             try
@@ -91,7 +91,7 @@ namespace RecipeApi.Controllers
         }
 
         [HttpPut ("{id}")]
-        [KeyAuthorize(PolicyEnum.User)]
+       // [KeyAuthorize(PolicyEnum.User)]
         public IActionResult UpDateRecipes(int id, Recipe recipe) // metoda musi miec id i obiekt
         {
 
@@ -128,7 +128,7 @@ namespace RecipeApi.Controllers
             //return NoContent();
         }
         [HttpDelete("{id}")]
-        [KeyAuthorize(PolicyEnum.Admin)]
+        //[KeyAuthorize(PolicyEnum.Admin)]
         public ActionResult<Recipe> DeleteRecipes(int id) // w<> podajemy typ, który będzie zwracany
         {
             try
