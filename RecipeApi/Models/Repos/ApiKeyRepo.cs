@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RecipeApi.Models.Repos
 {
-    public class ApiKeyRepo : IApiKeyRepocs
+    public class ApiKeyRepo : IApiKeyRepos
 
     {
         private readonly RecipeContext context;

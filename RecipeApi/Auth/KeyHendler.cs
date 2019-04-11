@@ -18,11 +18,11 @@ namespace RecipeApi.Auth
 
         private IHttpContextAccessor contextAccessor;
 
-        private readonly IApiKeyRepocs repo;
+        private readonly IApiKeyRepos repo;
 
  
 
-        public KeyHandler(IHttpContextAccessor contextAccessor, ApiKeyRepo repo)
+        public KeyHandler(IHttpContextAccessor contextAccessor, IApiKeyRepos repo)
 
         {
 

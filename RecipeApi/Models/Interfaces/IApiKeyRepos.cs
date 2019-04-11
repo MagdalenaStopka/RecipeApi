@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace RecipeApi.Models.Interfaces
 {
-   public interface IApiKeyRepocs
+   public interface IApiKeyRepos
     {
         bool CheckApiKey(string key);
         Task<List<string>> GetKeys();

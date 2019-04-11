@@ -26,15 +26,16 @@ namespace RecipeApi
         {
             this.configuration = configuration;
             StaticValues.ConnectionHelper = configuration.GetConnectionString("SQLiteConnection");
-        } 
+        }
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddDbContext<RecipeContext>(o => o.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<RecipeContext>(o => o.UseSqlite(StaticValues.ConnectionHelper));
-            services.AddScoped<IApiKeyRepocs, ApiKeyRepo>();
-            services.AddTransient<IAuthorizationHandler, KeyHandler>();
+
             services.AddHttpContextAccessor(); // dotęp do request i headersy
-            services.AddAuthorization(options =>
+            services
+                .AddMvcCore()
+                .AddAuthorization(options =>
 
             {
 
@@ -54,12 +55,14 @@ namespace RecipeApi
 
                     policy.Requirements.Add(new KeyRequirement(PolicyEnum.Lack)));
 
-            });
+            })
 
-            services.AddMvcCore() // to powinno być zawsze na końcu
+
                 .AddDataAnnotations()
                 .AddJsonFormatters()
                 .AddJsonOptions(o => o.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented);
+            services.AddTransient<IApiKeyRepos, ApiKeyRepo>();
+            services.AddTransient<IAuthorizationHandler, KeyHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,8 +77,8 @@ namespace RecipeApi
             {
                 app.UseHsts(); // wymuszenie polaczenia przez certyfikowane polaczenie i sprawdza czas od servera i spowrotem
             }
-            
 
+            addDefaultKey();
             app.UseMvc();
 
             app.Run(async (context) =>
